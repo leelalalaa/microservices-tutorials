@@ -11,3 +11,5 @@
 //you can change the scripts and it can just be like npm run dev
 
 4. npm install nodemon -D => this'll help us so that we don't have to restart everytime -> it'll automatically do it whenever you make changes 
+
+5. in the connection string after the ? you have to name the db
