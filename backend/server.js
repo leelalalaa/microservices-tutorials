@@ -9,7 +9,13 @@ const app = express();
 
 app.get("/products", (req,res) => {});
 
-app.post("/products", (req,res) => {}); 
+app.post("/products", async (req,res) => {
+    const product = req.body; // user will send this data 
+
+    if(!product.name || !product.price || !product.image) {
+        return res.status(400).json({ success: false, message: "Please provide all fields" }); 
+    }
+}); 
 
 console.log(process.env.MONGO_URI); 
 
