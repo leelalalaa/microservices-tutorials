@@ -1,6 +1,7 @@
 //const express = require('express'); archaic way of doing this
 import express from "express"; 
 import dotenv from "dotenv";
+import mongoose from "mongoose"; 
 import { connectDB } from "./config/db.js"; 
 import Product from "./models/product.model.js";
 
@@ -59,6 +60,10 @@ app.get("/api/products", async (req,res) => {
 app.put("/api/products/:id", async (req,res) => {
     const {id} = req.params; 
     const product = req.body;
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ success: false, message: "Invalid Product Id" });
+    }
 
     try {
         const updatedProduct = await Product.findByIdAndUpdate(id, product, {new:true});
