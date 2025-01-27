@@ -11,17 +11,23 @@ const app = express();
 app.use(express.json()); //middleware - allows us to accept JSON data in the req body 
 
 app.post("/api/products", async (req,res) => {
-    const product = req.body; // user will send this data 
+    const { name, price, image } = req.body;
+    const product = req.body; 
 
-    if(!product.name || !product.price || !product.image) {
+    if(!name || !price || !image) {
         return res.status(400).json({ success: false, message: "Please provide all fields" }); 
     }
 
     const newProduct = new Product(product);
 
     try {
-        await newProduct.save(); 
-        res.status(201).json({ success: true, data: newProduct });
+        const existingProduct = await Product.findOne({name}); 
+        if(!existingProduct) {
+            await newProduct.save(); 
+            res.status(201).json({ success: true, data: newProduct });
+        } else {
+            res.status(407).json({ success: false, message: "A product w this name alr exists" }); 
+        }
     } catch (error) {
         console.error("Error in Create Product: ", error); 
         res.status(500).json({ success: false, message: "Server Error" });
@@ -30,7 +36,6 @@ app.post("/api/products", async (req,res) => {
 
 app.delete("/api/products/:id", async (req,res) => {
     const {id} = req.params; 
-    console.log("id:", id);
     try {
         const deletedProduct = await Product.findByIdAndDelete(id); 
         if(!deletedProduct) {
