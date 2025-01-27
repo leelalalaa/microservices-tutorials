@@ -47,6 +47,27 @@ app.delete("/api/products/:id", async (req,res) => {
     }
 });
 
+app.get("/api/products", async (req,res) => {
+    try {
+        const products = await Product.find({});
+        res.status(200).json({ success: true, data: products }); 
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server Error" }); 
+    }
+});
+
+app.put("/api/products/:id", async (req,res) => {
+    const {id} = req.params; 
+    const product = req.body;
+
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, {new:true});
+        res.status(200).json({ success: true, data: updatedProduct }); 
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server Error" }); 
+    }
+});
+
 app.listen(5000, () => {
     connectDB();
     console.log("Server started at http://localhost:5000"); 
