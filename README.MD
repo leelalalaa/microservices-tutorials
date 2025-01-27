@@ -27,3 +27,5 @@ App.jsx is entry point
 Browser Router is used for any other comps that are coming from the package, like routes, so we can have diff pages 
 
 9. npm install zustand 
+
+https://www.youtube.com/watch?v=O3BUHwfHf84&t=2195s 
