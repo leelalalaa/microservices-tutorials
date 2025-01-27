@@ -1,8 +1,10 @@
 import { Route, Routes, Link } from 'react-router-dom';
 import CreatePage from "./pages/CreatePage"; 
 import HomePage from "./pages/HomePage";
+import { useProductStore } from './store/product';
 
 function App() {
+  const { products } = useProductStore(); 
   return (
     <>
       <Link to="/">Home</Link> {/* Link to HomePage */}   
