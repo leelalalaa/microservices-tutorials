@@ -26,7 +26,12 @@ app.post("/api/products", async (req,res) => {
         console.error("Error in Create Product: ", error); 
         res.status(500).json({ success: false, message: "Server Error" });
     }
-}); 
+});
+
+app.delete("/api/products/:id", async (req,res) => {
+    const {id} = req.params; 
+    console.log("id:", id);
+});
 
 app.listen(5000, () => {
     connectDB();
