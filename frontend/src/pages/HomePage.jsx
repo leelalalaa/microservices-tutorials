@@ -18,7 +18,10 @@ const HomePage = () => {
             {products.map((product) => (
                 <ProductCard key={product._id} product={product} /> 
             ))}
-            <Link to="/create">no products found :(</Link>
+
+            {products.length === 0 && (
+                <Link to="/create">no products found :(</Link>
+            )}
         </>
     );
 }
