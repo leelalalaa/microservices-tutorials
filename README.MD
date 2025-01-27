@@ -25,3 +25,5 @@ So, the way this works is we have our connectDB function in the config, we're us
 App.jsx is entry point 
 
 Browser Router is used for any other comps that are coming from the package, like routes, so we can have diff pages 
+
+9. npm install zustand 
